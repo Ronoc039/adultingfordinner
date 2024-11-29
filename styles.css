@@ -17,7 +17,7 @@ tsbody {
     width: 100vw;
     overflow: hidden;
     box-sizing: border-box;
-    background-image: url('https://raw.githubusercontent.com/Ronoc039/adultingfordinner/refs/heads/main/Assets/Kitchen.png');
+    background-image: background-image: url('assets/Kitchen.png');
     background-size: cover;
     background-position: center;
 }
