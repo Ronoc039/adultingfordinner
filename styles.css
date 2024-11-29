@@ -17,7 +17,7 @@ tsbody {
     width: 100vw;
     overflow: hidden;
     box-sizing: border-box;
-    background-image: background-image: url('assets/Kitchen.png');
+    background-image: url('assets/Kitchen.png');
     background-size: cover;
     background-position: center;
 }
@@ -33,7 +33,7 @@ tsbody {
     border: 5px solid #ccc;
     overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    background-image: background-image: url('assets/Plate.png');
+    background-image: url('assets/Plate.png');
     background-size: cover;
     background-position: center;
 }
