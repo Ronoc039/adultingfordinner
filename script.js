@@ -7,7 +7,7 @@ const foods = [
 const meals = [
     'Egyptian Koshari with Tomato Sauce',
     'Greek Souvlaki with Tzatziki Sauce',
-    'Chinese Kung Pao Chicken with Steamed Rice'
+    'Chinese Kung Pao Chicken with Steamed Rice',
     'Spaghetti Bolognese with garlic bread and a side salad',
     'Grilled chicken with roasted vegetables and quinoa',
     'Sushi platter with miso soup and edamame',
@@ -67,7 +67,7 @@ const meals = [
     'Baked Salmon with Dill Sauce',
     'Chicken Fajitas',
     'Lobster Rolls',
-    'Vegetarian Samosas'
+    'Vegetarian Samosas',
     'Tandoori Chicken with Naan and Chutney',
     'Sushi Rolls with Edamame',
     'Beef Pho with Fresh Herbs',
@@ -114,8 +114,7 @@ const meals = [
     'Mexican Chiles Rellenos with Refried Beans',
     'Filipino Adobo with Garlic Rice',
     'Thai Green Papaya Salad with Sticky Rice',
-    'Moroccan Couscous with Roasted Vegetables',
-    // ... other meals
+    'Moroccan Couscous with Roasted Vegetables'
 ];
 
 const foodContainer = document.getElementById('floating-food-container');
@@ -125,25 +124,25 @@ const randomFoodButton = document.getElementById('random-food-button');
 const scoreDisplay = document.getElementById('score');
 
 let score = 0;
-
-// Store the initial positions of each food
 let initialPositions = [];
 
-// Generate random food items floating around
+// Generate random floating food items
 function generateFloatingFood() {
     foodContainer.innerHTML = ''; // Clear existing food
+    initialPositions = []; // Reset initial positions
+
     foods.forEach((food, index) => {
         const foodElement = document.createElement('div');
         foodElement.classList.add('food');
         const left = Math.random() * (window.innerWidth - 50);
         const top = Math.random() * (window.innerHeight - 50);
-        foodElement.style.left = left + 'px';
-        foodElement.style.top = top + 'px';
+        foodElement.style.left = `${left}px`;
+        foodElement.style.top = `${top}px`;
         foodElement.textContent = food;
 
-        // Add random animation speed and direction
-        const duration = Math.random() * 3 + 2; // Random duration between 2 to 5 seconds
-        const direction = Math.random() < 0.5 ? 'normal' : 'reverse'; // Random direction
+        // Random animation speed and direction
+        const duration = Math.random() * 3 + 2; // Between 2 to 5 seconds
+        const direction = Math.random() < 0.5 ? 'normal' : 'reverse';
         foodElement.style.animation = `float ${duration}s ${direction} infinite`;
 
         initialPositions[index] = { left, top, foodElement };
@@ -157,7 +156,7 @@ function generateFloatingFood() {
 
 // Show random points
 function showPoints(foodElement) {
-    const points = Math.random() < 0.8 ? Math.floor(Math.random() * 5) + 1 : -(Math.floor(Math.random() * 2) + 1); // 80% chance for positive points
+    const points = Math.random() < 0.8 ? Math.floor(Math.random() * 5) + 1 : -(Math.floor(Math.random() * 2) + 1);
     const pointElement = document.createElement('div');
     pointElement.classList.add('point-popup');
     pointElement.textContent = points >= 0 ? `+${points}` : `${points}`;
@@ -168,8 +167,7 @@ function showPoints(foodElement) {
     document.body.appendChild(pointElement);
 
     // Update score
-    score += points;
-    scoreDisplay.textContent = `Score: ${score}`;
+    updateScore(points);
 
     // Check for image display
     if (score >= 10) {
@@ -180,17 +178,12 @@ function showPoints(foodElement) {
     setTimeout(() => {
         pointElement.remove();
     }, 1000);
+}
 
-const scoreDisplay = document.getElementById('score');
-let score = 0;
-
-// Example function to update score
+// Update score display
 function updateScore(points) {
     score += points;
     scoreDisplay.textContent = `Score: ${score}`;
-}
-
-// Trigger this function whenever you want to update the score
 }
 
 // Add clicked food to the plate in random positions
@@ -218,10 +211,11 @@ function removeFromPlate(index, li) {
     li.remove();
     const { left, top, foodElement } = initialPositions[index];
     foodElement.style.display = 'block';
-    foodElement.style.left = left + 'px';
-    foodElement.style.top = top + 'px';
+    foodElement.style.left = `${left}px`;
+    foodElement.style.top = `${top}px`;
 }
 
+// Random meal selector for dinner
 randomFoodButton.addEventListener('click', () => {
     const randomIndex = Math.floor(Math.random() * meals.length);
     const randomMeal = meals[randomIndex];
