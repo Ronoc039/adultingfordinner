@@ -4,6 +4,8 @@ const foods = [
     // Add more emojis to reach 200 as needed
 ];
 
+const fruits = ['🍉', '🍇', '🍓', '🍊', '🍋', '🍍'];
+
 const meals = [
     'Egyptian Koshari with Tomato Sauce',
     'Greek Souvlaki with Tzatziki Sauce',
@@ -125,6 +127,7 @@ const scoreDisplay = document.getElementById('score');
 
 let score = 0;
 let initialPositions = [];
+let clickedFruits = new Set();
 
 // Generate random floating food items
 function generateFloatingFood() {
@@ -148,6 +151,10 @@ function generateFloatingFood() {
         initialPositions[index] = { left, top, foodElement };
         foodElement.addEventListener('click', () => {
             addToPlate(food, index);
+            if (fruits.includes(food)) {
+                clickedFruits.add(food);
+                checkFruitsCollected();
+            }
             showPoints(foodElement);
         });
         foodContainer.appendChild(foodElement);
@@ -168,11 +175,6 @@ function showPoints(foodElement) {
 
     // Update score
     updateScore(points);
-
-    // Check for image display
-    if (score >= 10) {
-        displayImage();
-    }
 
     // Remove the point element after animation
     setTimeout(() => {
@@ -215,6 +217,13 @@ function removeFromPlate(index, li) {
     foodElement.style.top = `${top}px`;
 }
 
+// Check if all fruits have been collected
+function checkFruitsCollected() {
+    if (clickedFruits.size === fruits.length) {
+        displayImage();
+    }
+}
+
 // Random meal selector for dinner
 randomFoodButton.addEventListener('click', () => {
     const randomIndex = Math.floor(Math.random() * meals.length);
@@ -228,7 +237,7 @@ generateFloatingFood();
 // Ensure floating foods are generated upon resizing the window
 window.addEventListener('resize', generateFloatingFood);
 
-// Function to display an image when score reaches 10
+// Function to display an image when all fruits are collected
 function displayImage() {
     const image = document.createElement('img');
     image.src = 'Assets/Dinner.jpg'; // Replace with your image path
