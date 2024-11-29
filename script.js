@@ -5,6 +5,9 @@ const foods = [
 ];
 
 const meals = [
+    'Egyptian Koshari with Tomato Sauce',
+    'Greek Souvlaki with Tzatziki Sauce',
+    'Chinese Kung Pao Chicken with Steamed Rice'
     'Spaghetti Bolognese with garlic bread and a side salad',
     'Grilled chicken with roasted vegetables and quinoa',
     'Sushi platter with miso soup and edamame',
@@ -112,9 +115,7 @@ const meals = [
     'Filipino Adobo with Garlic Rice',
     'Thai Green Papaya Salad with Sticky Rice',
     'Moroccan Couscous with Roasted Vegetables',
-    'Egyptian Koshari with Tomato Sauce',
-    'Greek Souvlaki with Tzatziki Sauce',
-    'Chinese Kung Pao Chicken with Steamed Rice'
+    // ... other meals
 ];
 
 const foodContainer = document.getElementById('floating-food-container');
@@ -221,9 +222,9 @@ function removeFromPlate(index, li) {
     foodElement.style.top = top + 'px';
 }
 
-// Random meal selector for dinner
 randomFoodButton.addEventListener('click', () => {
-    const randomMeal = meals[Math.floor(Math.random() * meals.length)];
+    const randomIndex = Math.floor(Math.random() * meals.length);
+    const randomMeal = meals[randomIndex];
     randomFoodResult.textContent = `For dinner tonight, the universe wants you to eat ${randomMeal}. You're welcome!`;
 });
 
@@ -236,7 +237,7 @@ window.addEventListener('resize', generateFloatingFood);
 // Function to display an image when score reaches 10
 function displayImage() {
     const image = document.createElement('img');
-    image.src = 'path/to/your/congrats-image.jpg'; // Replace with your image path
+    image.src = 'Assets/Dinner.jpg'; // Replace with your image path
     image.style.position = 'absolute';
     image.style.top = '50%';
     image.style.left = '50%';
